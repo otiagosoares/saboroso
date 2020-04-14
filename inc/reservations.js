@@ -18,7 +18,6 @@ module.exports = {
 
             let date = fields.date.split('/')
             fields.date = `${date[2]}-${date[1]}-${date[0]}`
-            
             let query = `INSERT 
                     INTO tb_reservations 
                     (name, email, people, date, time) 
