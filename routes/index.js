@@ -24,11 +24,7 @@ router.get('/contacts', (req, res, next)=>{
 })
 
 router.get('/reservations', (req, res, next)=>{
-  res.render('reservation', {
-    title: 'Reservas - Restaurante Saboroso' ,
-    backgroundImage: 'images/img_bg_2.jpg',
-    h1: 'Reserve uma mesa!'
-  })
+  reservations.render(req, res, null, null)
 })
 
 router.post('/reservations', (req, res)=> {
@@ -45,7 +41,12 @@ router.post('/reservations', (req, res)=> {
       reservations.render(req,res, "Informe a hora da reserva.")
     }else{
 
-      db
+      reservations.save(req.body).then(results=>{
+        req.body = {}
+        reservations.render(req, res, null, "Reserva realizada com sucesso!")
+      }).catch((err)=>{
+        reservations.render(req, res, err.message)
+      })
 
     }
     
