@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const menus = require('../inc/menus')
+const reservations = require('../inc/reservations')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,6 +29,28 @@ router.get('/reservations', (req, res, next)=>{
     backgroundImage: 'images/img_bg_2.jpg',
     h1: 'Reserve uma mesa!'
   })
+})
+
+router.post('/reservations', (req, res)=> {
+
+    if(!req.body.name){
+      reservations.render(req,res, "Digite um nome.")
+    }else if(!req.body.email){
+      reservations.render(req,res, "Infome um email valido.")
+    }else if(!req.body.people){
+      reservations.render(req,res, "Infome o número de pessoas.")
+    }else if(!req.body.date){
+      reservations.render(req,res, "Info a data da reserva.")
+    }else if(!req.body.time){
+      reservations.render(req,res, "Informe a hora da reserva.")
+    }else{
+
+      db
+
+    }
+    
+
+
 })
 
 router.get('/menus', (req, res, next)=>{
